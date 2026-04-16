@@ -1,54 +1,43 @@
-import './Projects.css'
+import './Projects.css';
 
-const projects = [
-  // {
-  //   title: 'E-Commerce Platform',
-  //   description: 'A full-stack MERN e-commerce app with authentication, cart functionality, payment integration, and admin dashboard.',
-  //   tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-  //   link: '#',
-  // },
+// Using stable IDs for list rendering instead of array indices is a React best practice,
+// as it prevents rendering bugs and improves performance during list mutations.
+const projectsData = [
   {
+    id: 'proj-1',
     title: 'Social Media Dashboard',
     description: 'Real-time social media analytics dashboard with interactive charts, user management, and notification system.',
     tags: ['React', 'Socket.io', 'MongoDB', 'Chart.js'],
     link: '#',
   },
-  // {
-  //   title: 'Task Management App',
-  //   description: 'A collaborative project management tool with drag-and-drop boards, real-time updates, and team collaboration features.',
-  //   tags: ['React', 'Node.js', 'MongoDB', 'Redux'],
-  //   link: '#',
-  // },
   {
+    id: 'proj-2',
     title: 'Portfolio Website',
     description: 'A modern, responsive portfolio website built with React and stunning animations to showcase projects and skills.',
     tags: ['React', 'CSS3', 'Vite', 'Responsive'],
     link: '#',
   },
   {
+    id: 'proj-3',
     title: 'Blog Platform',
     description: 'A full-featured blog platform with rich text editor, comment system, user authentication, and SEO optimization.',
     tags: ['React', 'Node.js', 'MongoDB', 'JWT'],
     link: '#',
   },
-  // {
-  //   title: 'Weather Application',
-  //   description: 'A beautiful weather app with location-based forecasts, interactive maps, and real-time weather data integration.',
-  //   tags: ['React', 'API', 'CSS3', 'Geolocation'],
-  //   link: '#',
-  // },
-]
+];
 
 function Projects() {
   return (
-    <section className="page projects-page" id="projects">
+    <section className="page projects-page" id="projects" aria-labelledby="projects-heading">
       <div className="page-container">
+        {/* Section Label */}
         <div className="page-label">
-          <span className="page-label-dot"></span>
+          <span className="page-label-dot" aria-hidden="true"></span>
           My Work
         </div>
 
-        <h1 className="page-heading">
+        {/* Header */}
+        <h1 className="page-heading" id="projects-heading">
           Featured <span className="highlight">Projects</span>
         </h1>
 
@@ -56,27 +45,58 @@ function Projects() {
           Here are some of the projects I've built that showcase my skills and passion.
         </p>
 
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div className="project-card" key={index}>
-              <div className="project-card-number">0{index + 1}</div>
-              <h3 className="project-card-title">{project.title}</h3>
-              <p className="project-card-desc">{project.description}</p>
-              <div className="project-card-tags">
-                {project.tags.map((tag, i) => (
-                  <span className="project-tag" key={i}>{tag}</span>
-                ))}
+        {/* Projects Grid */}
+        <div className="projects-grid" role="list">
+          {projectsData.length > 0 ? (
+            projectsData.map((project, index) => (
+              <div className="project-card" key={project.id} role="listitem">
+                {/* Visual Numbering for styling purposes */}
+                <div className="project-card-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+                
+                <h3 className="project-card-title">{project.title}</h3>
+                
+                <p className="project-card-desc">{project.description}</p>
+                
+                {/* Tech Stack Tags */}
+                <div className="project-card-tags" aria-label={`Technologies used in ${project.title}`}>
+                  {project.tags.map((tag) => (
+                    // Tags are unique per project, so the tag string itself is a stable key
+                    <span className="project-tag" key={tag}>{tag}</span>
+                  ))}
+                </div>
+                
+                <a 
+                  href={project.link} 
+                  className="project-card-link" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title} project in a new tab`}
+                >
+                  View Project
+                  <svg 
+                    viewBox="0 0 24 24" 
+                    width="16" 
+                    height="16" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                  </svg>
+                </a>
               </div>
-              <a href={project.link} className="project-card-link" target="_blank" rel="noopener noreferrer">
-                View Project
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </a>
-            </div>
-          ))}
+            ))
+          ) : (
+            // Realistic edge case check for empty project list
+            <p className="no-projects-msg">More projects coming soon!</p>
+          )}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Projects
+export default Projects;
