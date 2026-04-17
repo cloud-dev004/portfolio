@@ -5,24 +5,24 @@ import './Projects.css';
 const projectsData = [
   {
     id: 'proj-1',
-    title: 'Social Media Dashboard',
-    description: 'Real-time social media analytics dashboard with interactive charts, user management, and notification system.',
-    tags: ['React', 'Socket.io', 'MongoDB', 'Chart.js'],
+    title: 'LOCALLENS',
+    description: 'A platform for local workers to connect with customers and showcase their skills.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MYSQL'],
     link: '#',
   },
   {
     id: 'proj-2',
     title: 'Portfolio Website',
     description: 'A modern, responsive portfolio website built with React and stunning animations to showcase projects and skills.',
-    tags: ['React', 'CSS3', 'Vite', 'Responsive'],
-    link: '#',
+    tags: ['React', 'CSS3', 'Vite', 'Node.js'],
+    link: 'https://cloud-dev-portfolio.netlify.app/',
   },
   {
     id: 'proj-3',
-    title: 'Blog Platform',
-    description: 'A full-featured blog platform with rich text editor, comment system, user authentication, and SEO optimization.',
-    tags: ['React', 'Node.js', 'MongoDB', 'JWT'],
-    link: '#',
+    title: 'UYIR',
+    description: 'A platform to rescue the stray animals and to provide them shelter and medical care.',
+    tags: ['React', 'Node.js', 'MongoDB', 'Express'],
+    link: 'https://uyir-animal-rescue-platform.netlify.app/',
   },
 ];
 
@@ -54,11 +54,11 @@ function Projects() {
                 <div className="project-card-number" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </div>
-                
+
                 <h3 className="project-card-title">{project.title}</h3>
-                
+
                 <p className="project-card-desc">{project.description}</p>
-                
+
                 {/* Tech Stack Tags */}
                 <div className="project-card-tags" aria-label={`Technologies used in ${project.title}`}>
                   {project.tags.map((tag) => (
@@ -66,25 +66,25 @@ function Projects() {
                     <span className="project-tag" key={tag}>{tag}</span>
                   ))}
                 </div>
-                
-                <a 
-                  href={project.link} 
-                  className="project-card-link" 
-                  target="_blank" 
+
+                <a
+                  href={project.link}
+                  className="project-card-link"
+                  target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`View ${project.title} project in a new tab`}
                 >
                   View Project
-                  <svg 
-                    viewBox="0 0 24 24" 
-                    width="16" 
-                    height="16" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
                     strokeWidth="2"
                     aria-hidden="true"
                   >
-                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                    <path d="M7 17L17 7M17 7H7M17 7v10" />
                   </svg>
                 </a>
               </div>
